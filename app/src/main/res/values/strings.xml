@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Memory Training</string>
+    <string name="question_mark">\?</string>
+    <string name="welcome_title">Состав числа</string>
+    <string name="button_understand">Понятно</string>
+    <string name="welcome_logo">Welcome logo</string>
+    <string name="choose_level_title">Выберите уровень:</string>
+    <string name="choose_operation">Выберите действие:</string>
+    <string name="addition">Сложение</string>
+    <string name="subtraction">Вычитание</string>
+    <string name="multiplication">Умножение</string>
+    <string name="division">Деление</string>
+    <string name="choose_game">Выберите игру:</string>
+    <string name="game_counting">Устный счет</string>
+    <string name="game_memory">Зрительная память</string>
+    <string name="easy_level">Легкий</string>
+    <string name="normal_level">Средний</string>
+    <string name="hard_level">Тяжелый</string>
+    <string name="test_level">Тестовый</string>
+    <string name="game_over">Game Over</string>
+    <string name="score_answers">Ваш счет: %s</string>
+    <string name="score_percentage">Процент правильных ответов: %s</string>
+    <string name="retry">Попробовать снова</string>
+    <string name="right_answers">Правильных ответов %s из %s необходимых</string>
+    <string name="required_percentage">Необходимый процент правильных ответов: %s</string>
+    <string name="required_score">Необходимое количество правильных ответов: %s</string>
+    <string name="progress_answers">Правильных ответов %s (минимум %s)</string>
 </resources>

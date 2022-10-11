@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startScreenFragment">
+
+    <fragment
+        android:id="@+id/startScreenFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.StartScreenFragment"
+        android:label="fragment_start_screen"
+        tools:layout="@layout/fragment_start_screen" >
+        <action
+            android:id="@+id/action_startScreenFragment_to_arithmeticOperationFragment"
+            app:destination="@id/arithmeticOperationFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_difficultyLevelFragment"
+            app:destination="@id/difficultyLevelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseLevelFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ChooseLevelFragment"
+        android:label="fragment_choose_level"
+        tools:layout="@layout/fragment_choose_level" >
+        <action
+            android:id="@+id/action_chooseLevelFragment_to_verbalCountingGameFragment"
+            app:destination="@id/verbalCountingGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFinishedFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.GameFinishedFragment"
+        android:label="fragment_game_finished"
+        tools:layout="@layout/fragment_game_finished" />
+    <fragment
+        android:id="@+id/verbalCountingGameFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.VerbalCountingGameFragment"
+        android:label="fragment_verbal_counting_game"
+        tools:layout="@layout/fragment_verbal_counting_game" >
+        <action
+            android:id="@+id/action_verbalCountingGameFragment_to_gameFinishedFragment"
+            app:destination="@id/gameFinishedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/arithmeticOperationFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ArithmeticOperationFragment"
+        android:label="fragment_arithmetic_operation"
+        tools:layout="@layout/fragment_arithmetic_operation" >
+        <action
+            android:id="@+id/action_arithmeticOperationFragment_to_chooseLevelFragment"
+            app:destination="@id/chooseLevelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/difficultyLevelFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.DifficultyLevelFragment"
+        android:label="fragment_difficulty_level"
+        tools:layout="@layout/fragment_difficulty_level" >
+        <action
+            android:id="@+id/action_difficultyLevelFragment_to_memoryFragment"
+            app:destination="@id/memoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoryFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.MemoryFragment"
+        android:label="fragment_memory"
+        tools:layout="@layout/fragment_memory" />
+</navigation>
