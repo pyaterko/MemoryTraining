@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.memorytraining.base
+package com.owl_laugh_at_wasted_time.memorytraining.ui.base
 
 import android.view.LayoutInflater
 import android.view.View

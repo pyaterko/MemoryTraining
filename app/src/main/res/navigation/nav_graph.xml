@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startScreenFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.StartScreenFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.StartScreenFragment"
         android:label="fragment_start_screen"
         tools:layout="@layout/fragment_start_screen" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseLevelFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.ChooseLevelFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.ChooseLevelFragment"
         android:label="fragment_choose_level"
         tools:layout="@layout/fragment_choose_level" >
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/gameFinishedFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.GameFinishedFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.GameFinishedFragment"
         android:label="fragment_game_finished"
         tools:layout="@layout/fragment_game_finished" />
     <fragment
         android:id="@+id/verbalCountingGameFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.VerbalCountingGameFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.VerbalCountingGameFragment"
         android:label="fragment_verbal_counting_game"
         tools:layout="@layout/fragment_verbal_counting_game" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/arithmeticOperationFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.ArithmeticOperationFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.ArithmeticOperationFragment"
         android:label="fragment_arithmetic_operation"
         tools:layout="@layout/fragment_arithmetic_operation" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/difficultyLevelFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.DifficultyLevelFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.DifficultyLevelFragment"
         android:label="fragment_difficulty_level"
         tools:layout="@layout/fragment_difficulty_level" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/memoryFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.MemoryFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.MemoryFragment"
         android:label="fragment_memory"
         tools:layout="@layout/fragment_memory" />
 </navigation>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChooseLevelFragment">
+    android:gravity="center"
+    tools:context=".ui.fragment.ChooseLevelFragment">
 
 
 
@@ -13,19 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:gravity="center"
             android:text="@string/choose_level_title"
             android:textSize="24sp"
             android:textStyle="bold"
             />
 
-        <Button
-            android:id="@+id/button_level_test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/test_level"
-            />
 
         <Button
             android:id="@+id/button_verbal"
