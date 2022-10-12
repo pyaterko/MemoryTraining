@@ -1,11 +1,11 @@
 package com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.usecases
 
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.GameRepository
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.GameVerbalCountingRepository
 
 
 class GenerateQuestionUsecase(
-    private val repository: GameRepository
+    private val repository: GameVerbalCountingRepository
 ) {
     operator fun invoke(maxSumValue: Int): Question {
         return repository.generatyQuestion(maxSumValue, COUNT_OF_OPTIONS)

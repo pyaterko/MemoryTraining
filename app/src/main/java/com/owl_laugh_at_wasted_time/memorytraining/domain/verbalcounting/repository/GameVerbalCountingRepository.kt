@@ -4,7 +4,7 @@ import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
 
-interface GameRepository {
+interface GameVerbalCountingRepository {
     fun generatyQuestion(
         maxSumValue: Int,
         countOfOptions: Int

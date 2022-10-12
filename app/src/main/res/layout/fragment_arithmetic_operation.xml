@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ui.fragment.ArithmeticOperationFragment">
+    tools:context=".ui.fragment.verbalcounting.ArithmeticOperationFragment">
 
 
 
@@ -21,16 +21,17 @@
             />
 
         <Button
-            android:id="@+id/button_level_test"
+            android:id="@+id/addition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/darker_gray"
             android:text="@string/addition"
             />
 
         <Button
-            android:id="@+id/button_verbal"
+            android:id="@+id/subtraction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -40,7 +41,7 @@
             />
 
         <Button
-            android:id="@+id/button_memory"
+            android:id="@+id/multiplication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -50,7 +51,7 @@
             />
 
         <Button
-            android:id="@+id/button_level_hard"
+            android:id="@+id/division"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
