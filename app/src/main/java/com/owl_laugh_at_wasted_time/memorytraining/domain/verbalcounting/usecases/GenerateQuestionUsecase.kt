@@ -2,9 +2,10 @@ package com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.usecas
 
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.GameVerbalCountingRepository
+import javax.inject.Inject
 
 
-class GenerateQuestionUsecase(
+class GenerateQuestionUsecase @Inject constructor (
     private val repository: GameVerbalCountingRepository
 ) {
     operator fun invoke(maxSumValue: Int): Question {

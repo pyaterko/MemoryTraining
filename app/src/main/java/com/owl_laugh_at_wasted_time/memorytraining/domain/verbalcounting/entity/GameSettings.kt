@@ -8,7 +8,7 @@ data class GameSettings(
     val maxSumValue: Int,
     val minCountOfRightAnswers: Int,
     val minPersentOfRightAnswers: Int,
-    val gameTimaInSeconds: Int
+    val gameTimeInSeconds: Int
 ) : Parcelable {
 
 }
