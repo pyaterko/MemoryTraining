@@ -30,7 +30,11 @@
         android:id="@+id/gameFinishedFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting.GameFinishedFragment"
         android:label="fragment_game_finished"
-        tools:layout="@layout/fragment_game_finished" />
+        tools:layout="@layout/fragment_game_finished" >
+        <argument
+            android:name="resuit"
+            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameResult" />
+    </fragment>
     <fragment
         android:id="@+id/verbalCountingGameFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting.VerbalCountingGameFragment"
@@ -38,7 +42,12 @@
         tools:layout="@layout/fragment_verbal_counting_game" >
         <action
             android:id="@+id/action_verbalCountingGameFragment_to_gameFinishedFragment"
-            app:destination="@id/gameFinishedFragment" />
+            app:destination="@id/gameFinishedFragment"
+            app:popUpTo="@id/verbalCountingGameFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="level"
+            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level" />
     </fragment>
     <fragment
         android:id="@+id/arithmeticOperationFragment"

@@ -23,7 +23,15 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         val from = sum - 6
         val to = sum + 6
         while (opcions.size < countOfOptions) {
-            opcions.add(Random.nextInt(from, to))
+
+            val x=Random.nextInt(from, to)
+
+            val number = if (x < 0) {
+                Random.nextInt(1, 10)
+            } else {
+               x
+            }
+            opcions.add(number)
         }
         return Question(sum, firstTerm, secondTerm, opcions.toList())
     }
@@ -32,17 +40,17 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         return when (level) {
             Level.EASY -> {
                 GameSettings(
-                    30, 3, 60, 8
+                    20, 10, 70, 30
                 )
             }
             Level.NORMAL -> {
                 GameSettings(
-                    50, 20, 80, 60
+                    100, 20, 80, 60
                 )
             }
             Level.HARD -> {
                 GameSettings(
-                    100, 20, 90, 30
+                    1000, 30, 90, 60
                 )
             }
         }

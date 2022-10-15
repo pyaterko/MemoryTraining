@@ -2,7 +2,6 @@ package com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.owl_laugh_at_wasted_time.memorytraining.R
@@ -16,9 +15,9 @@ class ChooseLevelFragment : Fragment(R.layout.fragment_choose_level) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             buttonLevelEasy.setOnClickListener {
-              launchVerbalCountingGameFragment(Level.EASY)
+                launchVerbalCountingGameFragment(Level.EASY)
             }
             buttonLevelNormal.setOnClickListener {
                 launchVerbalCountingGameFragment(Level.NORMAL)
@@ -31,8 +30,7 @@ class ChooseLevelFragment : Fragment(R.layout.fragment_choose_level) {
 
     private fun launchVerbalCountingGameFragment(level: Level) {
         findNavController().navigate(
-            R.id.action_chooseLevelFragment_to_verbalCountingGameFragment,
-            bundleOf("LEVEL" to level)
+           ChooseLevelFragmentDirections.actionChooseLevelFragmentToVerbalCountingGameFragment(level)
         )
     }
 

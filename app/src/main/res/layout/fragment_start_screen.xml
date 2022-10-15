@@ -23,7 +23,7 @@
 
 
         <Button
-            android:id="@+id/button_verbal"
+            android:id="@+id/buttonVerbal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
             />
 
         <Button
-            android:id="@+id/button_memory"
+            android:id="@+id/buttonMemory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

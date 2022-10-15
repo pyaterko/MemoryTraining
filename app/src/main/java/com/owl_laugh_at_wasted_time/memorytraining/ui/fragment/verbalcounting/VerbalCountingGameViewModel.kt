@@ -36,6 +36,9 @@ class VerbalCountingGameViewModel @Inject constructor(
     private val _percentOfRightAnswers = MutableLiveData<Int>()
     val percentOfRightAnswers: LiveData<Int> = _percentOfRightAnswers
 
+    private val _colorTimer = MutableLiveData<Int>()
+    val colorTimer: LiveData<Int> = _colorTimer
+
     private val _progressAnswers = MutableLiveData<String>()
     val progressAnswers: LiveData<String> = _progressAnswers
 
@@ -57,9 +60,10 @@ class VerbalCountingGameViewModel @Inject constructor(
         _minPercent.value = gameSettings.minPersentOfRightAnswers
         startTimer()
         generetQuestion()
+        updateProgress()
     }
 
-    private fun chooeAnswee(number: Int) {
+     fun chooeAnswee(number: Int) {
         if (number == question.value?.result) {
             countOfRightAnswers++
         }
@@ -70,7 +74,7 @@ class VerbalCountingGameViewModel @Inject constructor(
 
     private fun updateProgress() {
         val percent = ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
-        _percentOfRightAnswers.value = percent
+        _percentOfRightAnswers.value = if (countOfQuestions==0) 0 else percent
         _progressAnswers.value = String.format(
             uiActions.getString(R.string.progress_answers),
             countOfRightAnswers,
@@ -86,6 +90,7 @@ class VerbalCountingGameViewModel @Inject constructor(
             MILLIS_IN_SECONDS
         ) {
             override fun onTick(timeUntilCompletion: Long) {
+                _colorTimer.value=(timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
                 val time = formatTime(timeUntilCompletion)
                 _timeLiveData.value = time
             }
