@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/tables_title"
+            android:title="@string/tables_title">
+            <menu>
+                <item
+                    android:id="@+id/tb_multiplication"
+                    android:title="@string/tb_multiplication"/>
+                <item
+                    android:id="@+id/tb_division"
+                    android:title="@string/tb_division"/>
+            </menu>
+        </item>
+    </group>
+
+    <item
+        android:id="@+id/help_addition"
+        android:title="@string/help_add"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/help_subtraction"
+        android:title="@string/help_sub"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/help_multiplication"
+        android:title="@string/help_mul"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/help_division"
+        android:title="@string/help_div"
+        app:showAsAction="never"/>
+
+
+</menu>

@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.memorytraining.ui.fragment
+package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.startscreen
 
 import android.os.Bundle
 import android.view.View

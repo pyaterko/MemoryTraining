@@ -2,7 +2,7 @@ package com.owl_laugh_at_wasted_time.memorytraining.di
 
 import android.content.Context
 import com.owl_laugh_at_wasted_time.memorytraining.ui.activity.MainActivity
-import com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting.VerbalCountingGameFragment
+import com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.game.VerbalCountingGameFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

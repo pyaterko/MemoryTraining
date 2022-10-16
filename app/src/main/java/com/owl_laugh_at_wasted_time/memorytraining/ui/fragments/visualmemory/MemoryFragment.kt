@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.visualmemory
+package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.visualmemory
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.data.GameImp
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentMemoryBinding
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.Game
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.viewBinding
 

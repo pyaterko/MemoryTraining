@@ -1,14 +1,11 @@
-package com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting
+package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.game
 
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.owl_laugh_at_wasted_time.memorytraining.R
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameResult
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameSettings
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.*
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.usecases.GenerateQuestionUsecase
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.usecases.GetGameSettingsUsecase
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.uiactions.UiActions
@@ -19,6 +16,9 @@ class VerbalCountingGameViewModel @Inject constructor(
     private val getGameSettings: GetGameSettingsUsecase,
     private val uiActions: UiActions
 ) : ViewModel() {
+
+    var operation: Operation? = null
+
 
     private lateinit var gameSettings: GameSettings
     private lateinit var level: Level
@@ -54,27 +54,30 @@ class VerbalCountingGameViewModel @Inject constructor(
     private val _gameResult = MutableLiveData<GameResult>()
     val gameResult: LiveData<GameResult> = _gameResult
 
+    private val _correctAnswer = MutableLiveData<Boolean>()
+    val correctAnswer: LiveData<Boolean> = _correctAnswer
+
     fun startGame(level: Level) {
         this.level = level
         this.gameSettings = getGameSettings(level)
         _minPercent.value = gameSettings.minPersentOfRightAnswers
         startTimer()
-        generetQuestion()
+        operation?.let { generetQuestion(it,level) }
         updateProgress()
     }
 
-     fun chooeAnswee(number: Int) {
+    fun chooeAnswee(number: Int,level: Level) {
         if (number == question.value?.result) {
             countOfRightAnswers++
         }
         countOfQuestions++
         updateProgress()
-        generetQuestion()
+        operation?.let { generetQuestion(it,level) }
     }
 
     private fun updateProgress() {
         val percent = ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
-        _percentOfRightAnswers.value = if (countOfQuestions==0) 0 else percent
+        _percentOfRightAnswers.value = if (countOfQuestions == 0) 0 else percent
         _progressAnswers.value = String.format(
             uiActions.getString(R.string.progress_answers),
             countOfRightAnswers,
@@ -90,7 +93,7 @@ class VerbalCountingGameViewModel @Inject constructor(
             MILLIS_IN_SECONDS
         ) {
             override fun onTick(timeUntilCompletion: Long) {
-                _colorTimer.value=(timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
+                _colorTimer.value = (timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
                 val time = formatTime(timeUntilCompletion)
                 _timeLiveData.value = time
             }
@@ -109,8 +112,8 @@ class VerbalCountingGameViewModel @Inject constructor(
         return String.format("%02d:%02d", minutes, remainingSeconds)
     }
 
-    private fun generetQuestion() {
-        _question.value = generateQuestion(gameSettings.maxSumValue)
+    private fun generetQuestion(operation: Operation,level: Level) {
+        _question.value = generateQuestion(gameSettings.maxSumValue, operation,level)
     }
 
     private fun finishGame() {

@@ -2,12 +2,15 @@ package com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.reposi
 
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameSettings
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Operation
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
 
 interface GameVerbalCountingRepository {
     fun generatyQuestion(
-        maxSumValue: Int,
-        countOfOptions: Int
+        maxValue: Int,
+        countOfOptions: Int,
+        operation: Operation,
+        level: Level
     ): Question
 
     fun getGameSettings(level: Level): GameSettings

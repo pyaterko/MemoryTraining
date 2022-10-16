@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.memorytraining.ui.fragment.verbalcounting
+package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.game
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentVerbalCountingGameBinding
-import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Operation
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Question
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.BaseFragment
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.viewBinding
 
@@ -20,8 +21,9 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
     private val binding by viewBinding(FragmentVerbalCountingGameBinding::bind)
     private val viewModel by viewModels<VerbalCountingGameViewModel> { viewModelFactory }
 
-    private lateinit var level: Level
+    private lateinit var currentQuestion: Question
 
+    private val args by navArgs<VerbalCountingGameFragmentArgs>()
     val tvOptions by lazy {
         mutableListOf<TextView>().apply {
             add(binding.tvOption1)
@@ -36,29 +38,60 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
     override fun onAttach(context: Context) {
         super.onAttach(context)
         component.inject(this)
-        level = VerbalCountingGameFragmentArgs.fromBundle(requireArguments()).level
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.operation = args.operation
         obserbViewModel()
         setOnClickListenerToOptions()
-        viewModel.startGame(level)
+        viewModel.startGame(args.level)
+        binding.textViewMath.text = getTextMath(args.operation)
 
+    }
+
+    private fun getTextMath(operation: Operation): String {
+        when (operation) {
+            Operation.ADDITION -> {
+                return " + "
+            }
+            Operation.SUBTRACTION -> {
+                return " - "
+            }
+            Operation.MULTIPLICATION -> {
+                return " x "
+            }
+            Operation.DIVISION -> {
+                return " : "
+            }
+        }
     }
 
     private fun setOnClickListenerToOptions() {
         for (tvOption in tvOptions) {
             tvOption.setOnClickListener {
-                viewModel.chooeAnswee(tvOption.text.toString().toInt())
+                val isCorrectlyResult = tvOption.text.toString().toInt() == currentQuestion.result
+                binding.result.text = getTextByResult(isCorrectlyResult)
+                binding.result.setTextColor(
+                    getColorByState(isCorrectlyResult)
+                )
+                viewModel.chooeAnswee(tvOption.text.toString().toInt(), args.level)
             }
         }
     }
 
+    private fun getTextByResult(correctlyResult: Boolean): String =
+        if (correctlyResult) {
+            getString(R.string.ok)
+        } else {
+            getString(R.string.no)
+        }
+
+
     private fun obserbViewModel() {
         viewModel.apply {
             question.observe(viewLifecycleOwner) {
+                currentQuestion = it
                 binding.firstNumber.text = it.firstNumber.toString()
                 binding.secondNumber.text = it.secondNumber.toString()
                 for (i in 0 until tvOptions.size) {
@@ -89,15 +122,17 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
 
             gameResult.observe(viewLifecycleOwner) {
                 findNavController().navigate(
-                  VerbalCountingGameFragmentDirections.actionVerbalCountingGameFragmentToGameFinishedFragment(it)
+                    VerbalCountingGameFragmentDirections.actionVerbalCountingGameFragmentToGameFinishedFragment(
+                        it
+                    )
                 )
             }
             progressAnswers.observe(viewLifecycleOwner) {
                 binding.tvAnswersProgress.text = it
             }
-            colorTimer.observe(viewLifecycleOwner){
+            colorTimer.observe(viewLifecycleOwner) {
 
-                binding.tvTimer.setTextColor(getColorByState(it>10))
+                binding.tvTimer.setTextColor(getColorByState(it > 10))
             }
         }
 
