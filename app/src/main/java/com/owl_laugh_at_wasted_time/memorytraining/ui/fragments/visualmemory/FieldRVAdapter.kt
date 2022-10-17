@@ -5,9 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.ItemFieldCellBinding
 import com.owl_laugh_at_wasted_time.memorytraining.domain.visualmemory.entity.Cell
+class FieldDiffCallBack(
+    private val oldItem: List<Cell>,
+    private val newItem: List<Cell>
+) : DiffUtil.Callback() {
+    override fun getOldListSize(): Int = oldItem.size
+
+    override fun getNewListSize(): Int = newItem.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldItem[oldItemPosition].id == newItem[newItemPosition].id
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldItem[oldItemPosition] == newItem[newItemPosition]
+}
 
 class FieldRVAdapter() : RecyclerView.Adapter<Vh>() {
 
@@ -15,8 +30,10 @@ class FieldRVAdapter() : RecyclerView.Adapter<Vh>() {
 
     var items: List<Cell> = emptyList()
         set(value) {
+            val diffCallBack = FieldDiffCallBack(field, value)
+            val diffResult = DiffUtil.calculateDiff(diffCallBack)
             field = value
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
 
     override fun getItemId(position: Int): Long {
@@ -47,7 +64,7 @@ class Vh(
     binding.root
 ) {
      fun bind(cell: Cell) {
-           binding.cellTv.setBackgroundColor( ContextCompat.getColor(context, cell.focus.toMark()))
+           binding.cellTv.setBackgroundColor( ContextCompat.getColor(context, cell.currentState.toMark()))
      }
 }
 

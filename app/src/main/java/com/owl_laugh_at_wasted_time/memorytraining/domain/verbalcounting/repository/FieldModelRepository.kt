@@ -11,5 +11,4 @@ interface FieldModelRepository {
     suspend fun addList(list: List<Cell>)
     suspend fun delete()
     suspend fun activField(size: Int)
-    suspend fun notActivField(size: Int)
 }

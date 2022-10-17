@@ -17,15 +17,18 @@ class MemoryFragmentViewModel @Inject constructor(
    private val repository: FieldModelRepository
 ) : ViewModel() {
 
+    init {
+        viewModelScope.launch {
+            delete()
+        }
+    }
+
     val getList =repository.getList()
 
   suspend fun activField(size: Int) {
           repository.activField(size)
     }
 
-   suspend fun notActivField(size: Int){
-            repository.notActivField(size)
-    }
 
      fun addItem(item: Cell) {
          viewModelScope.launch {

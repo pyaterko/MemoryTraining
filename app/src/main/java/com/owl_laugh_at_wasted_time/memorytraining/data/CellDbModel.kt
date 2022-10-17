@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class CellDbModel(
     @PrimaryKey
     val id: Int,
-    val focus: Boolean
+    val defaultState: Boolean,
+    val currentState: Boolean
 )

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.owl_laugh_at_wasted_time.memorytraining.R
@@ -22,6 +23,9 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
     private val args by navArgs<MemoryFragmentArgs>()
 
     private var field: List<Cell>? = null
+    private var easy = 4
+    private var medium = 6
+    private var hard = 8
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,19 +39,17 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
 
         startGame(adapter)
         viewModel.getList.observe(viewLifecycleOwner) {
-            if (field == null) {
-                field = it
-                adapter.items = it
-            } else {
-                adapter.items = it
-            }
-
+            field = it.toList()
+            adapter.items = it
         }
 
-        adapter.onItemClickListener = { cell->
-                val x=cell
-            if (field!![cell.id].focus) {
-                viewModel.addItem(field!![cell.id])
+        adapter.onItemClickListener = { cell ->
+            if (cell.defaultState == true) {
+                viewModel.addItem(cell.copy(currentState = true))
+            } else {
+                field?.forEach {
+                    viewModel.addItem(it.copy(currentState = it.defaultState))
+                }
             }
         }
 
@@ -57,21 +59,41 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
         when (args.level) {
             Level.EASY -> {
                 binding.recyclerViewField.layoutManager =
-                    GridLayoutManager(requireContext(), 6)
+                    GridLayoutManager(requireContext(), easy)
                 binding.recyclerViewField.adapter = adapter
                 launchScope {
-                    viewModel.activField(36)
-                    delay(3000)
-                    viewModel.notActivField(36)
+                    viewModel.activField(easy * easy)
+                    delay(5000)
+                    field?.forEach {
+                        viewModel.addItem(it.copy(currentState = false))
+                    }
                 }
-
             }
             Level.NORMAL -> {
-
+                binding.recyclerViewField.layoutManager =
+                    GridLayoutManager(requireContext(), medium)
+                binding.recyclerViewField.adapter = adapter
+                launchScope {
+                    viewModel.activField(medium * medium)
+                    delay(5000)
+                    field?.forEach {
+                        viewModel.addItem(it.copy(currentState = false))
+                    }
+                }
             }
             Level.HARD -> {
-
+                binding.recyclerViewField.layoutManager =
+                    GridLayoutManager(requireContext(), hard)
+                binding.recyclerViewField.adapter = adapter
+                launchScope {
+                    viewModel.activField(hard * hard)
+                    delay(5000)
+                    field?.forEach {
+                        viewModel.addItem(it.copy(currentState = false))
+                    }
+                }
             }
         }
     }
+
 }

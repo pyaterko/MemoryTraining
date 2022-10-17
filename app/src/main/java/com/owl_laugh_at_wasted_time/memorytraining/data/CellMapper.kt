@@ -8,12 +8,14 @@ class CellMapper @Inject constructor() {
 
     fun mapEntityToDbModel(item: Cell) = CellDbModel(
         id = item.id,
-        focus = item.focus
+        currentState = item.currentState,
+        defaultState = item.defaultState
     )
 
     fun mapDbModelToEntity(item: CellDbModel) = Cell(
         id = item.id,
-        focus = item.focus
+        currentState = item.currentState,
+        defaultState = item.defaultState
     )
 
     fun mapListDbModelToListEntity(list: List<CellDbModel>) = list.map {

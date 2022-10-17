@@ -15,15 +15,8 @@ class FieldModelRepositoryImpl @Inject constructor(
     override suspend fun activField(size: Int) {
         val list = mutableListOf<Cell>()
         for (i in 0..size - 1) {
-            list.add(Cell(i, Random.nextBoolean()))
-        }
-        addList(list)
-    }
-
-    override suspend fun notActivField(size: Int) {
-        val list = mutableListOf<Cell>()
-        for (i in 0..size - 1) {
-            list.add(Cell(i, false))
+            val state = Random.nextBoolean()
+            list.add(Cell(i, state, state))
         }
         addList(list)
     }
