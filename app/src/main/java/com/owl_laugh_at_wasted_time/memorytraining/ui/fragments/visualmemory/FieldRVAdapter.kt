@@ -1,56 +1,57 @@
 package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.visualmemory
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.owl_laugh_at_wasted_time.memorytraining.R
-import com.owl_laugh_at_wasted_time.memorytraining.domain.visualmemory.entity.Field
+import com.owl_laugh_at_wasted_time.memorytraining.databinding.ItemFieldCellBinding
+import com.owl_laugh_at_wasted_time.memorytraining.domain.visualmemory.entity.Cell
 
-class FieldRVAdapter(
-    private val field: Field,
-    private val onClick: (position: Int) -> Unit
-) : RecyclerView.Adapter<Vh>() {
+class FieldRVAdapter() : RecyclerView.Adapter<Vh>() {
 
-    init {
-        setHasStableIds(true)
-    }
+    var onItemClickListener: ((Cell) -> Unit)? = null
+
+    var items: List<Cell> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Vh(parent, onClick)
-    override fun onBindViewHolder(holder: Vh, position: Int) {
-        holder.bind(field.getCell(position), position)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vh {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemFieldCellBinding.inflate(inflater, parent, false)
+        return Vh(binding,parent.context)
     }
 
-    override fun getItemCount(): Int = field.size * field.size
-}
-
-class Vh(
-    parent: ViewGroup,
-    onClick: (position: Int) -> Unit
-) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.item_field_cell, parent, false)
-) {
-    private val tv = itemView.findViewById<TextView>(R.id.cell_tv)
-    private var index = -1
-
-    init {
-        tv.setOnClickListener {
-            onClick(index)
+    override fun onBindViewHolder(holder: Vh, position: Int) {
+        val cell = items[position]
+        holder.bind(cell)
+        holder.binding.cellTv.setOnClickListener {
+            onItemClickListener?.invoke(cell)
         }
     }
 
-    fun bind(cell: Boolean?, position: Int) {
-        index = position
-        tv.text = cell.toMark()
-    }
+    override fun getItemCount(): Int = items.size
 }
 
-fun Boolean?.toMark(): String = when (this) {
-    true -> "X"
-    false -> "O"
-    null -> ""
+class Vh(
+    val binding: ItemFieldCellBinding,
+    val context: Context
+) : RecyclerView.ViewHolder(
+    binding.root
+) {
+     fun bind(cell: Cell) {
+           binding.cellTv.setBackgroundColor( ContextCompat.getColor(context, cell.focus.toMark()))
+     }
+}
+
+fun Boolean.toMark(): Int = when (this) {
+    true -> android.R.color.holo_red_dark
+    false -> android.R.color.darker_gray
 }

@@ -32,7 +32,7 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
             questionMul(maxValue, countOfOptions, level)
         }
         Operation.DIVISION -> {
-            questionDiv(maxValue, countOfOptions,level)
+            questionDiv(maxValue, countOfOptions, level)
         }
     }
 
@@ -40,10 +40,10 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         maxValue: Int,
         countOfOptions: Int
     ): Question {
-        val result = Random.nextInt(MIN_SUM_VALUE, maxValue + 1)
-        val firstNumber = Random.nextInt(MIN_ANSWER_VALUE, result)
+        val firstNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue / 2)
+        val secondNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue / 2)
+        val result = firstNumber + secondNumber
         val opcions = HashSet<Int>()
-        val secondNumber = result - firstNumber
         opcions.add(result)
         val from = result - 6
         val to = result + 6
@@ -64,7 +64,7 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         countOfOptions: Int
     ): Question {
         val firstNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue + 1)
-        val secondNumber = Random.nextInt(MIN_ANSWER_VALUE, firstNumber + 1)
+        val secondNumber = Random.nextInt(MIN_ANSWER_VALUE, firstNumber )
         val opcions = HashSet<Int>()
         val result = firstNumber - secondNumber
         opcions.add(result)
@@ -133,13 +133,13 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
     private fun resultInDiv(maxValue: Int, level: Level): Int =
         when (level) {
             Level.EASY -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION * 3)
             }
             Level.NORMAL -> {
-                Random.nextInt(MAX_MULTIPLICATION , maxValue + 1)
+                Random.nextInt(MAX_MULTIPLICATION, maxValue / 10 + 1)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION , (maxValue / 10) + 1)
+                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
             }
         }
 
@@ -149,10 +149,10 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
                 Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
             }
             Level.NORMAL -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MAX_MULTIPLICATION, MAX_MULTIPLICATION * 2 + 1)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION , (maxValue / 10) + 1)
+                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
             }
         }
 
@@ -160,26 +160,26 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
     private fun firstNumberInMul(maxValue: Int, level: Level) =
         when (level) {
             Level.EASY -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
             }
             Level.NORMAL -> {
-                Random.nextInt(MAX_MULTIPLICATION , maxValue + 1)
+                Random.nextInt(MAX_MULTIPLICATION, maxValue / 10 + 1)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION , (maxValue / 10) + 1)
+                Random.nextInt(MAX_MULTIPLICATION, maxValue / 20 + 1)
             }
         }
 
     private fun secondNumberInMul(maxValue: Int, level: Level) =
         when (level) {
             Level.EASY -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
             }
             Level.NORMAL -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION , (maxValue / 10) + 1)
+                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
             }
         }
 
@@ -187,17 +187,17 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         return when (level) {
             Level.EASY -> {
                 GameSettings(
-                    30, 10, 90, 30
+                    100, 10, 90, 30
                 )
             }
             Level.NORMAL -> {
                 GameSettings(
-                    100, 10, 90, 60
+                    1000, 10, 90, 60
                 )
             }
             Level.HARD -> {
                 GameSettings(
-                    1000, 10, 90, 60
+                    2000, 10, 90, 60
                 )
             }
         }

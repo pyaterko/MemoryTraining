@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentDifficultyLevelBinding
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.viewBinding
 
 class DifficultyLevelFragment:Fragment(R.layout.fragment_difficulty_level) {
@@ -17,17 +18,22 @@ class DifficultyLevelFragment:Fragment(R.layout.fragment_difficulty_level) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonLevelEasy.setOnClickListener {
-            findNavController().navigate(R.id.action_difficultyLevelFragment_to_memoryFragment,
-                bundleOf("DIFFICULTY_LEVEL" to 8)
+            findNavController().navigate(
+              DifficultyLevelFragmentDirections
+                  .actionDifficultyLevelFragmentToMemoryFragment(Level.EASY)
             )
         }
         binding.buttonLevelMedium.setOnClickListener {
-            findNavController().navigate(R.id.action_difficultyLevelFragment_to_memoryFragment,
-                bundleOf("DIFFICULTY_LEVEL" to 10))
+            findNavController().navigate(
+                DifficultyLevelFragmentDirections
+                    .actionDifficultyLevelFragmentToMemoryFragment(Level.NORMAL)
+            )
         }
         binding.buttonLevelHard.setOnClickListener {
-            findNavController().navigate(R.id.action_difficultyLevelFragment_to_memoryFragment,
-                bundleOf("DIFFICULTY_LEVEL" to 15))
+            findNavController().navigate(
+                DifficultyLevelFragmentDirections
+                    .actionDifficultyLevelFragmentToMemoryFragment(Level.HARD)
+            )
 
         }
     }

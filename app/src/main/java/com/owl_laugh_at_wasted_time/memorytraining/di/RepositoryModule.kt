@@ -1,6 +1,8 @@
 package com.owl_laugh_at_wasted_time.memorytraining.di
 
+import com.owl_laugh_at_wasted_time.memorytraining.data.FieldModelRepositoryImpl
 import com.owl_laugh_at_wasted_time.memorytraining.data.GameVerbalCountingRepositoryImpl
+import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.FieldModelRepository
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.repository.GameVerbalCountingRepository
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.uiactions.AndroidUiActions
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.uiactions.UiActions
@@ -21,4 +23,8 @@ interface RepositoryModule {
     @Binds
     fun bindUiActions(impl: AndroidUiActions): UiActions
 
+
+    @Singleton
+    @Binds
+    fun bindFieldModelRepository(impl: FieldModelRepositoryImpl): FieldModelRepository
 }

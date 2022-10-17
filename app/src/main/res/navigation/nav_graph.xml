@@ -95,7 +95,11 @@
         android:id="@+id/memoryFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.visualmemory.MemoryFragment"
         android:label="fragment_memory"
-        tools:layout="@layout/fragment_memory" />
+        tools:layout="@layout/fragment_memory" >
+        <argument
+            android:name="level"
+            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level" />
+    </fragment>
     <fragment
         android:id="@+id/additionPageFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.learn.AdditionPageFragment"
