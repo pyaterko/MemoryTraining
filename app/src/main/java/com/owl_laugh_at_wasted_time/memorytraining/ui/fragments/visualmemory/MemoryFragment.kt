@@ -46,13 +46,36 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
         adapter.onItemClickListener = { cell ->
             if (cell.defaultState == true) {
                 viewModel.addItem(cell.copy(currentState = true))
+                launchScope {
+                    delay(1000)
+                    if (finish()) showFinishDialog(adapter)
+                }
             } else {
                 field?.forEach {
                     viewModel.addItem(it.copy(currentState = it.defaultState))
                 }
+                showFinishDialog(adapter)
             }
         }
+    }
 
+    private fun finish(): Boolean {
+        field?.forEach {
+            if (it.defaultState != it.currentState) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun showFinishDialog(adapter: FieldRVAdapter) {
+        displayAConfirmationDialog(requireContext(),
+            actionNB1 = {
+                findNavController().navigateUp()
+            },
+            actionPB1 = {
+                startGame(adapter)
+            })
     }
 
     private fun startGame(adapter: FieldRVAdapter) {
