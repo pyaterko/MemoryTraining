@@ -12,4 +12,7 @@ class AndroidUiActions @Inject constructor (
     override fun getString(messageRes:Int): String {
         return application.getString(messageRes)
     }
+
+    override fun getContext()=application
+
 }

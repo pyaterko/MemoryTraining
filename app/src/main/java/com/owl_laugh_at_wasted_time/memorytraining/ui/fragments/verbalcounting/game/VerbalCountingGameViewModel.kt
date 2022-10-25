@@ -1,5 +1,6 @@
 package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.game
 
+import android.media.MediaPlayer
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -62,17 +63,17 @@ class VerbalCountingGameViewModel @Inject constructor(
         this.gameSettings = getGameSettings(level)
         _minPercent.value = gameSettings.minPersentOfRightAnswers
         startTimer()
-        operation?.let { generetQuestion(it,level) }
+        operation?.let { generetQuestion(it, level) }
         updateProgress()
     }
 
-    fun chooeAnswee(number: Int,level: Level) {
+    fun chooeAnswee(number: Int, level: Level) {
         if (number == question.value?.result) {
             countOfRightAnswers++
         }
         countOfQuestions++
         updateProgress()
-        operation?.let { generetQuestion(it,level) }
+        operation?.let { generetQuestion(it, level) }
     }
 
     private fun updateProgress() {
@@ -93,7 +94,12 @@ class VerbalCountingGameViewModel @Inject constructor(
             MILLIS_IN_SECONDS
         ) {
             override fun onTick(timeUntilCompletion: Long) {
-                _colorTimer.value = (timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
+                val sec = (timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
+                val player = MediaPlayer.create(uiActions.getContext(), R.raw.signal)
+                if (sec < 11) {
+                    player.start()
+                }
+                _colorTimer.value = sec
                 val time = formatTime(timeUntilCompletion)
                 _timeLiveData.value = time
             }
@@ -112,8 +118,8 @@ class VerbalCountingGameViewModel @Inject constructor(
         return String.format("%02d:%02d", minutes, remainingSeconds)
     }
 
-    private fun generetQuestion(operation: Operation,level: Level) {
-        _question.value = generateQuestion(gameSettings.maxSumValue, operation,level)
+    private fun generetQuestion(operation: Operation, level: Level) {
+        _question.value = generateQuestion(gameSettings.maxSumValue, operation, level)
     }
 
     private fun finishGame() {

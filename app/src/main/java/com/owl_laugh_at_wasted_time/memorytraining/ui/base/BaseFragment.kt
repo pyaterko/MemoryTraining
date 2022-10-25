@@ -17,6 +17,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private var showDialog = true
 
     val component by lazy {
         (activity as MainActivity).component
@@ -39,20 +40,26 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     actionPB1?.invoke()
+                    showDialog=true
                 }
                 DialogInterface.BUTTON_NEGATIVE -> {}
                 DialogInterface.BUTTON_NEUTRAL -> {
                     actionNB1?.invoke()
+                    showDialog=true
                 }
             }
         }
         val dialog = android.app.AlertDialog.Builder(context)
-            .setCancelable(true)
+            .setCancelable(false)
             .setPositiveButton(R.string.repeat, listener)
             .setNeutralButton(R.string.select_level_difficulty, listener)
             .create()
         dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
+        if (showDialog){
+            dialog.show()
+            showDialog=false
+        }
+
 
         dialog?.window?.let {
             val lp = it.attributes

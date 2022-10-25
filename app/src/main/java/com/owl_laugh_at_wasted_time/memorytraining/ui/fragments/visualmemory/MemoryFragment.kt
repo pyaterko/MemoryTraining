@@ -22,10 +22,11 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
 
     private val args by navArgs<MemoryFragmentArgs>()
 
+
     private var field: List<Cell>? = null
-    private var easy = 4
-    private var medium = 6
-    private var hard = 8
+    private var easy = 5
+    private var medium = 7
+    private var hard = 9
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -86,7 +87,7 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
                 binding.recyclerViewField.adapter = adapter
                 launchScope {
                     viewModel.activField(easy * easy)
-                    delay(5000)
+                    delay(3000)
                     field?.forEach {
                         viewModel.addItem(it.copy(currentState = false))
                     }
