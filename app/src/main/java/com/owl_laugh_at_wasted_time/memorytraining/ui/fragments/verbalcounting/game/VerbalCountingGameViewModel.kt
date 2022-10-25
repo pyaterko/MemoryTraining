@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.preference.PreferenceManager
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.*
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.usecases.GenerateQuestionUsecase
@@ -19,7 +20,8 @@ class VerbalCountingGameViewModel @Inject constructor(
 ) : ViewModel() {
 
     var operation: Operation? = null
-
+    val sharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(uiActions.getContext())
 
     private lateinit var gameSettings: GameSettings
     private lateinit var level: Level
@@ -62,7 +64,12 @@ class VerbalCountingGameViewModel @Inject constructor(
         this.level = level
         this.gameSettings = getGameSettings(level)
         _minPercent.value = gameSettings.minPersentOfRightAnswers
-        startTimer()
+        if (sharedPreferences.getBoolean(uiActions.getString(R.string.game_options), false)){
+            startTimer(gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS)
+        }else{
+            startTimer(600 * MILLIS_IN_SECONDS)
+        }
+
         operation?.let { generetQuestion(it, level) }
         updateProgress()
     }
@@ -88,16 +95,18 @@ class VerbalCountingGameViewModel @Inject constructor(
         _enoughPercentCorrectAnswers.value = percent >= gameSettings.minPersentOfRightAnswers
     }
 
-    private fun startTimer() {
+    private fun startTimer(time:Long) {
         timer = object : CountDownTimer(
-            gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS,
+            time,
             MILLIS_IN_SECONDS
         ) {
+            val player = MediaPlayer.create(uiActions.getContext(), R.raw.signal)
             override fun onTick(timeUntilCompletion: Long) {
                 val sec = (timeUntilCompletion / MILLIS_IN_SECONDS).toInt()
-                val player = MediaPlayer.create(uiActions.getContext(), R.raw.signal)
-                if (sec < 11) {
-                    player.start()
+                if (sharedPreferences.getBoolean(uiActions.getString(R.string.enable_sound), false)){
+                    if (sec < 11) {
+                        player.start()
+                    }
                 }
                 _colorTimer.value = sec
                 val time = formatTime(timeUntilCompletion)

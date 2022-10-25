@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+    <androidx.preference.CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/enable_sound"
+        android:title="@string/enable_sound_title"
+        android:summaryOff="звук отключен"
+        android:summaryOn="звук включен"/>
+
+    <androidx.preference.CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/game_options"
+        android:title="@string/game_options_title"
+        android:summaryOff="@string/endurance_game"
+        android:summaryOn="@string/time_game"/>
+
+    <androidx.preference.ListPreference
+        android:title="@string/difficulty_level"
+        android:key="@string/difficulty_level_key"
+        android:defaultValue="EASY"
+        android:entries="@array/level_array"
+        android:entryValues="@array/level_array_value"/>
+
+
+
+</androidx.preference.PreferenceScreen>

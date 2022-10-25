@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startScreenFragment_to_difficultyLevelFragment"
             app:destination="@id/difficultyLevelFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseLevelFragment"
@@ -130,4 +133,8 @@
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.learn.MultiplicatonTableFragment"
         android:label="fragment_multiplication_table"
         tools:layout="@layout/fragment_multiplication_table" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.preference.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
