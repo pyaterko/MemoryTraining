@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentMemoryBinding
@@ -19,10 +18,8 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
 
     private val binding: FragmentMemoryBinding by viewBinding(FragmentMemoryBinding::bind)
     private val viewModel by viewModels<MemoryFragmentViewModel> { viewModelFactory }
-
-    private val args by navArgs<MemoryFragmentArgs>()
-
-
+    private var counter = 0
+    private var saveCounter = 0
     private var field: List<Cell>? = null
     private var easy = 5
     private var medium = 7
@@ -35,6 +32,9 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        saveCounter = requireContext().getSharedPreferences(
+            CURRENT_STATISTICS_COUNTING, Context.MODE_PRIVATE
+        ).getInt(COUNTER_MEMORY, 0)
 
         val adapter = FieldRVAdapter()
 
@@ -49,15 +49,33 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
                 viewModel.addItem(cell.copy(currentState = true))
                 launchScope {
                     delay(1000)
-                    if (finish()) showFinishDialog(adapter)
+                    if (finish()) {
+                        counter++
+                        if (counter > saveCounter) {
+                            requireContext().getSharedPreferences(
+                                CURRENT_STATISTICS_COUNTING, Context.MODE_PRIVATE
+                            ).edit().putInt(COUNTER_MEMORY, counter).apply()
+                            requireContext().getSharedPreferences(
+                                CURRENT_STATISTICS_COUNTING, Context.MODE_PRIVATE
+                            ).edit().putString(STATISTIC_COUNTER_MEMORY, getStringStatistics())
+                                .apply()
+                            showFinishDialog(adapter)
+                        }
+
+                    }
                 }
             } else {
                 field?.forEach {
                     viewModel.addItem(it.copy(currentState = it.defaultState))
                 }
+                counter = 0
                 showFinishDialog(adapter)
             }
         }
+    }
+
+    private fun getStringStatistics(): String {
+        return "Лучший результат зрительной памяти:\t\t$dateOfCreation\nподряд выигрышей :\t\t $counter "
     }
 
     private fun finish(): Boolean {
@@ -80,7 +98,7 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
     }
 
     private fun startGame(adapter: FieldRVAdapter) {
-        when (args.level) {
+        when (getLevel()) {
             Level.EASY -> {
                 binding.recyclerViewField.layoutManager =
                     GridLayoutManager(requireContext(), easy)
@@ -119,5 +137,4 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
             }
         }
     }
-
 }

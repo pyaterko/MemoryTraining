@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentVerbalCountingGameBinding
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Operation
@@ -23,7 +22,6 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
 
     private lateinit var currentQuestion: Question
 
-    private val args by navArgs<VerbalCountingGameFragmentArgs>()
     val tvOptions by lazy {
         mutableListOf<TextView>().apply {
             add(binding.tvOption1)
@@ -42,11 +40,11 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.operation = args.operation
+        viewModel.operation = getOperation()
         obserbViewModel()
         setOnClickListenerToOptions()
-        viewModel.startGame(args.level)
-        binding.textViewMath.text = getTextMath(args.operation)
+        viewModel.startGame(getLevel())
+        binding.textViewMath.text = getTextMath(getOperation())
 
     }
 
@@ -75,7 +73,7 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
                 binding.result.setTextColor(
                     getColorByState(isCorrectlyResult)
                 )
-                viewModel.chooeAnswee(tvOption.text.toString().toInt(), args.level)
+                viewModel.chooeAnswee(tvOption.text.toString().toInt(), getLevel())
             }
         }
     }

@@ -11,26 +11,32 @@
         android:label="fragment_start_screen"
         tools:layout="@layout/fragment_start_screen" >
         <action
-            android:id="@+id/action_startScreenFragment_to_arithmeticOperationFragment"
-            app:destination="@id/arithmeticOperationFragment" />
-        <action
-            android:id="@+id/action_startScreenFragment_to_difficultyLevelFragment"
-            app:destination="@id/difficultyLevelFragment" />
-        <action
             android:id="@+id/action_startScreenFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chooseLevelFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.choose.ChooseLevelFragment"
-        android:label="fragment_choose_level"
-        tools:layout="@layout/fragment_choose_level" >
         <action
-            android:id="@+id/action_chooseLevelFragment_to_verbalCountingGameFragment"
+            android:id="@+id/action_startScreenFragment_to_memoryFragment"
+            app:destination="@id/memoryFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_verbalCountingGameFragment"
             app:destination="@id/verbalCountingGameFragment" />
-        <argument
-            android:name="operation"
-            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Operation" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_additionPageFragment"
+            app:destination="@id/additionPageFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_multiplicatonPageFragment"
+            app:destination="@id/multiplicatonPageFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_divisionPageFragment"
+            app:destination="@id/divisionPageFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_subtractionPageFragment"
+            app:destination="@id/subtractionPageFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_multiplicatonTableFragment"
+            app:destination="@id/multiplicatonTableFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_divisionTableFragment"
+            app:destination="@id/divisionTableFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFinishedFragment"
@@ -40,6 +46,11 @@
         <argument
             android:name="resuit"
             app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameResult" />
+        <action
+            android:id="@+id/action_gameFinishedFragment_to_verbalCountingGameFragment"
+            app:destination="@id/verbalCountingGameFragment"
+            app:popUpTo="@id/gameFinishedFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/verbalCountingGameFragment"
@@ -49,60 +60,15 @@
         <action
             android:id="@+id/action_verbalCountingGameFragment_to_gameFinishedFragment"
             app:destination="@id/gameFinishedFragment"
+            app:launchSingleTop="false"
             app:popUpTo="@id/verbalCountingGameFragment"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="level"
-            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level" />
-        <argument
-            android:name="operation"
-            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Operation" />
-    </fragment>
-    <fragment
-        android:id="@+id/arithmeticOperationFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.choose.ArithmeticOperationFragment"
-        android:label="fragment_arithmetic_operation"
-        tools:layout="@layout/fragment_arithmetic_operation" >
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_chooseLevelFragment"
-            app:destination="@id/chooseLevelFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_additionPageFragment"
-            app:destination="@id/additionPageFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_multiplicatonPageFragment"
-            app:destination="@id/multiplicatonPageFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_divisionPageFragment"
-            app:destination="@id/divisionPageFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_subtractionPageFragment"
-            app:destination="@id/subtractionPageFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_multiplicatonTableFragment"
-            app:destination="@id/multiplicatonTableFragment" />
-        <action
-            android:id="@+id/action_arithmeticOperationFragment_to_divisionTableFragment"
-            app:destination="@id/divisionTableFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/difficultyLevelFragment"
-        android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.visualmemory.DifficultyLevelFragment"
-        android:label="fragment_difficulty_level"
-        tools:layout="@layout/fragment_difficulty_level" >
-        <action
-            android:id="@+id/action_difficultyLevelFragment_to_memoryFragment"
-            app:destination="@id/memoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/memoryFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.visualmemory.MemoryFragment"
         android:label="fragment_memory"
-        tools:layout="@layout/fragment_memory" >
-        <argument
-            android:name="level"
-            app:argType="com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.Level" />
-    </fragment>
+        tools:layout="@layout/fragment_memory" />
     <fragment
         android:id="@+id/additionPageFragment"
         android:name="com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.learn.AdditionPageFragment"

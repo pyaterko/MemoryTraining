@@ -183,11 +183,13 @@
     <string name="select_level_difficulty">Выход</string>
     <string name="settings">Настройки</string>
     <string name="enable_sound">enable</string>
-    <string name="enable_sound_title">включить звук</string>
+    <string name="enable_sound_title">Включить звук</string>
     <string name="game_options">game options</string>
     <string name="game_options_title">Вариант устного счета</string>
     <string name="endurance_game">игра на выносливость</string>
     <string name="time_game">игра на время</string>
     <string name="difficulty_level">Уровень сложности</string>
     <string name="difficulty_level_key">difficulty level</string>
+    <string name="choose_arithmetic_operation">Выбрать арифметическую операцию</string>
+    <string name="arithmetic_operation_key">arithmetic operation</string>
 </resources>

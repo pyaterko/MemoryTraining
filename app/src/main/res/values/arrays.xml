@@ -12,5 +12,19 @@
         <item>@string/normal_level</item>
         <item>@string/hard_level</item>
     </array>
+
+    <array name="arithmetic_operation_value">
+        <item>ADDITION</item>
+        <item>SUBTRACTION</item>
+        <item>MULTIPLICATION</item>
+        <item>DIVISION</item>
+    </array>
+
+    <array name="choose_arithmetic_operation">
+        <item>@string/addition</item>
+        <item>@string/subtraction</item>
+        <item>@string/multiplication</item>
+        <item>@string/division</item>
+    </array>
 </resources>
 
