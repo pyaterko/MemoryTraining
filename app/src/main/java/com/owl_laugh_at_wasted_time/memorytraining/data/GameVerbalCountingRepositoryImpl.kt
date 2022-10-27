@@ -11,7 +11,7 @@ import kotlin.random.Random
 class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountingRepository {
 
     companion object {
-        private const val MIN_SUM_VALUE = 2
+        private const val MIN_SUM_VALUE = 10
         private const val MIN_ANSWER_VALUE = 1
         private const val MAX_MULTIPLICATION = 10
     }
@@ -23,10 +23,10 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         level: Level
     ): Question = when (operation) {
         Operation.ADDITION -> {
-            questionAdd(maxValue, countOfOptions)
+            questionAdd(maxValue, countOfOptions, level)
         }
         Operation.SUBTRACTION -> {
-            questionSub(maxValue, countOfOptions)
+            questionSub(maxValue, countOfOptions, level)
         }
         Operation.MULTIPLICATION -> {
             questionMul(maxValue, countOfOptions, level)
@@ -38,15 +38,16 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
 
     private fun questionAdd(
         maxValue: Int,
-        countOfOptions: Int
+        countOfOptions: Int,
+        level: Level
     ): Question {
-        val firstNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue / 2)
-        val secondNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue / 2)
-        val result = firstNumber + secondNumber
+        val result = Random.nextInt(MIN_SUM_VALUE, maxValue + 1)
+        val secondNumber = secondNumberInAdd(result, level)
+        val firstNumber = result - secondNumber
         val opcions = HashSet<Int>()
         opcions.add(result)
-        val from = result - 6
-        val to = result + 6
+        val from = result - 4
+        val to = result + 4
         while (opcions.size < countOfOptions) {
             val x = Random.nextInt(from, to)
             val number = if (x < 0) {
@@ -59,17 +60,31 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         return Question(result, firstNumber, secondNumber, opcions.toList())
     }
 
+    private fun secondNumberInAdd(result: Int, level: Level) =
+        when (level) {
+            Level.EASY -> {
+                Random.nextInt(MIN_ANSWER_VALUE, MIN_SUM_VALUE)
+            }
+            Level.NORMAL -> {
+                Random.nextInt(MIN_SUM_VALUE, result)
+            }
+            Level.HARD -> {
+                Random.nextInt(MIN_SUM_VALUE, result)
+            }
+        }
+
     private fun questionSub(
         maxValue: Int,
-        countOfOptions: Int
+        countOfOptions: Int,
+        level: Level
     ): Question {
-        val firstNumber = Random.nextInt(MIN_ANSWER_VALUE, maxValue + 1)
-        val secondNumber = Random.nextInt(MIN_ANSWER_VALUE, firstNumber )
+        val firstNumber = Random.nextInt(MIN_SUM_VALUE + 1, maxValue + 1)
+        val secondNumber = secondNumberInSub(firstNumber, level)
         val opcions = HashSet<Int>()
         val result = firstNumber - secondNumber
         opcions.add(result)
-        val from = result - 6
-        val to = result + 6
+        val from = result - 4
+        val to = result + 4
         while (opcions.size < countOfOptions) {
             val x = Random.nextInt(from, to)
             val number = if (x < 0) {
@@ -81,6 +96,19 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         }
         return Question(result, firstNumber, secondNumber, opcions.toList())
     }
+
+    private fun secondNumberInSub(firstNumber: Int, level: Level) =
+        when (level) {
+            Level.EASY -> {
+                Random.nextInt(MIN_ANSWER_VALUE, MIN_SUM_VALUE)
+            }
+            Level.NORMAL -> {
+                Random.nextInt(MIN_SUM_VALUE, firstNumber)
+            }
+            Level.HARD -> {
+                Random.nextInt(MIN_SUM_VALUE, firstNumber)
+            }
+        }
 
     private fun questionMul(
         maxValue: Int,
@@ -92,8 +120,8 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         val opcions = HashSet<Int>()
         val result = firstNumber * secondNumber
         opcions.add(result)
-        val from = result - 10
-        val to = result + 20
+        val from = result - 4
+        val to = result + 4
         while (opcions.size < countOfOptions) {
             val x = Random.nextInt(from, to)
             val number = if (x < 0) {
@@ -105,83 +133,56 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
         }
         return Question(result, firstNumber, secondNumber, opcions.toList())
     }
-
-    private fun questionDiv(
-        maxValue: Int,
-        countOfOptions: Int,
-        level: Level
-    ): Question {
-        val secondNumber = secondNumberInDiv(maxValue, level)
-        val result = resultInDiv(maxValue, level)
-        val opcions = HashSet<Int>()
-        val firstNumber = result * secondNumber
-        opcions.add(result)
-        val from = result - 10
-        val to = result + 20
-        while (opcions.size < countOfOptions) {
-            val x = Random.nextInt(from, to)
-            val number = if (x < 0) {
-                Random.nextInt(1, 10)
-            } else {
-                x
-            }
-            opcions.add(number)
-        }
-        return Question(result, firstNumber, secondNumber, opcions.toList())
-    }
-
-    private fun resultInDiv(maxValue: Int, level: Level): Int =
-        when (level) {
-            Level.EASY -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION * 3)
-            }
-            Level.NORMAL -> {
-                Random.nextInt(MAX_MULTIPLICATION, maxValue / 10 + 1)
-            }
-            Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
-            }
-        }
-
-    private fun secondNumberInDiv(maxValue: Int, level: Level): Int =
-        when (level) {
-            Level.EASY -> {
-                Random.nextInt(MIN_ANSWER_VALUE, MAX_MULTIPLICATION)
-            }
-            Level.NORMAL -> {
-                Random.nextInt(MAX_MULTIPLICATION, MAX_MULTIPLICATION * 2 + 1)
-            }
-            Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
-            }
-        }
-
 
     private fun firstNumberInMul(maxValue: Int, level: Level) =
         when (level) {
             Level.EASY -> {
-                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_ANSWER_VALUE + 1, MAX_MULTIPLICATION)
             }
             Level.NORMAL -> {
-                Random.nextInt(MAX_MULTIPLICATION, maxValue / 10 + 1)
+                Random.nextInt(MAX_MULTIPLICATION, maxValue + 1)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION, maxValue / 20 + 1)
+                Random.nextInt(MAX_MULTIPLICATION, maxValue/10)
             }
         }
 
     private fun secondNumberInMul(maxValue: Int, level: Level) =
         when (level) {
             Level.EASY -> {
-                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_ANSWER_VALUE + 1, MAX_MULTIPLICATION)
             }
             Level.NORMAL -> {
-                Random.nextInt(MIN_SUM_VALUE, MAX_MULTIPLICATION)
+                Random.nextInt(MIN_ANSWER_VALUE+1, MAX_MULTIPLICATION)
             }
             Level.HARD -> {
-                Random.nextInt(MAX_MULTIPLICATION, (maxValue / 20) + 1)
+                Random.nextInt(MAX_MULTIPLICATION+1, maxValue/10)
             }
         }
+
+    private fun questionDiv(
+        maxValue: Int,
+        countOfOptions: Int,
+        level: Level
+    ): Question {
+        val secondNumber = secondNumberInMul(maxValue, level)
+        val result = firstNumberInMul(maxValue, level)
+        val opcions = HashSet<Int>()
+        val firstNumber = result * secondNumber
+        opcions.add(result)
+        val from = result - 4
+        val to = result + 4
+        while (opcions.size < countOfOptions) {
+            val x = Random.nextInt(from, to)
+            val number = if (x < 0) {
+                Random.nextInt(1, 10)
+            } else {
+                x
+            }
+            opcions.add(number)
+        }
+        return Question(result, firstNumber, secondNumber, opcions.toList())
+    }
 
     override fun getGameSettings(level: Level): GameSettings {
         return when (level) {
@@ -192,12 +193,12 @@ class GameVerbalCountingRepositoryImpl @Inject constructor() : GameVerbalCountin
             }
             Level.NORMAL -> {
                 GameSettings(
-                    1000, 10, 90, 60
+                    100, 3, 90, 60
                 )
             }
             Level.HARD -> {
                 GameSettings(
-                    2000, 10, 90, 60
+                    1000, 2, 90, 60
                 )
             }
         }

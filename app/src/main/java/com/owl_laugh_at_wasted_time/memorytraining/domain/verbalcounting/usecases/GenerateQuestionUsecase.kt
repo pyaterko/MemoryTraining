@@ -15,6 +15,6 @@ class GenerateQuestionUsecase @Inject constructor(
     }
 
     private companion object {
-        private const val COUNT_OF_OPTIONS = 6
+        private const val COUNT_OF_OPTIONS = 4
     }
 }

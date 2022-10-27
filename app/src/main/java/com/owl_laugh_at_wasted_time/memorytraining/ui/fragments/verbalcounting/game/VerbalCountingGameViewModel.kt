@@ -57,9 +57,6 @@ class VerbalCountingGameViewModel @Inject constructor(
     private val _gameResult = MutableLiveData<GameResult>()
     val gameResult: LiveData<GameResult> = _gameResult
 
-    private val _correctAnswer = MutableLiveData<Boolean>()
-    val correctAnswer: LiveData<Boolean> = _correctAnswer
-
     fun startGame(level: Level) {
         this.level = level
         this.gameSettings = getGameSettings(level)

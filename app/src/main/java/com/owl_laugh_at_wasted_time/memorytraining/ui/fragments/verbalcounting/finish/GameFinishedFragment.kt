@@ -12,23 +12,18 @@ import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentGameFinis
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameResult
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.BaseFragment
 import com.owl_laugh_at_wasted_time.memorytraining.ui.base.viewBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
 
     private val binding by viewBinding(FragmentGameFinishedBinding::bind)
-
     private val args by navArgs<GameFinishedFragmentArgs>()
     private val gameResult: GameResult by lazy { args.resuit }
-    private lateinit var sharedPreferences: SharedPreferences
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         binding.emojiResult.setImageResource(getSmileResId())
 
@@ -53,6 +48,9 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
                 GameFinishedFragmentDirections
                     .actionGameFinishedFragmentToVerbalCountingGameFragment()
             )
+        }
+        binding.buttonGameOver.setOnClickListener {
+            findNavController().navigateUp()
         }
         setStatisticsCounter()
     }
@@ -95,11 +93,11 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
     ).getInt(COUNTING_ENDURANCE, 0)
 
     private fun getStringStatistics(): String {
-        return "Лучший результат устного счета\nна время:\t\t$dateOfCreation\n${getOperationByString()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
+        return "Лучший результат устного счета\nна время:\n$dateOfCreation\n${getStrinBygOperation()} уровень ${getStringByLevel()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
     }
 
     private fun getStringStatisticsEndurance(): String {
-        return "Лучший результат устного счета\nна выносливость:\t\t$dateOfCreation\n${getOperationByString()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
+        return "Лучший результат устного счета\nна выносливость:\n$dateOfCreation\n${getStrinBygOperation()} уровень ${getStringByLevel()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
     }
 
     private fun getPercentOfRightAnswers() = with(gameResult) {
@@ -116,28 +114,7 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
         R.drawable.ic_sad
     }
 
-    fun getOperationByString(): String {
-        val level =
-            sharedPreferences.getString(getString(R.string.arithmetic_operation_key), "ADDITION")
-                ?: "ADDITION"
-        return when (level) {
-            "ADDITION" -> {
-                getString(R.string.addition)
-            }
-            "SUBTRACTION" -> {
-                getString(R.string.subtraction)
-            }
-            "MULTIPLICATION" -> {
-                getString(R.string.multiplication)
-            }
-            "DIVISION" -> {
-                getString(R.string.division)
-            }
-            else -> {
-                getString(R.string.addition)
-            }
-        }
-    }
+
 
 }
 

@@ -2,6 +2,7 @@ package com.owl_laugh_at_wasted_time.memorytraining.ui.base
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -26,6 +27,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var dateOfCreation: String
     private var showDialog = true
+    lateinit var sharedPreferences: SharedPreferences
 
     val component by lazy {
         (activity as MainActivity).component
@@ -42,6 +44,8 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dateOfCreation = SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault()).format(Date())
+        sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
     }
 
     fun displayAConfirmationDialog(
@@ -83,8 +87,6 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
     }
 
     fun getLevel(): Level {
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
         val level =
             sharedPreferences.getString(getString(R.string.difficulty_level_key), "EASY") ?: "EASY"
         return when (level) {
@@ -102,14 +104,35 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             }
         }
     }
+
+    fun getStringByLevel(): String {
+        val level =
+            sharedPreferences.getString(getString(R.string.difficulty_level_key), "EASY") ?: "EASY"
+        return when (level) {
+            "EASY" -> {
+               getString(R.string.easy_level)
+            }
+            "NORMAL" -> {
+                getString(R.string.normal_level)
+            }
+            "HARD" -> {
+                getString(R.string.hard_level)
+            }
+            else -> {
+                getString(R.string.easy_level)
+            }
+        }
+    }
+
     fun getOperation(): Operation {
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(requireContext())
         val level =
-            sharedPreferences.getString(getString(R.string.arithmetic_operation_key), "ADDITION") ?: "ADDITION"
+            sharedPreferences.getString(getString(R.string.arithmetic_operation_key), "ADDITION")
+                ?: "ADDITION"
         return when (level) {
             "ADDITION" -> {
-               Operation.ADDITION
+                Operation.ADDITION
             }
             "SUBTRACTION" -> {
                 Operation.SUBTRACTION
@@ -125,12 +148,36 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             }
         }
     }
+
+    fun getStrinBygOperation(): String {
+        val level =
+            sharedPreferences.getString(getString(R.string.arithmetic_operation_key), "ADDITION")
+                ?: "ADDITION"
+        return when (level) {
+            "ADDITION" -> {
+                getString(R.string.addition)
+            }
+            "SUBTRACTION" -> {
+                getString(R.string.subtraction)
+            }
+            "MULTIPLICATION" -> {
+                getString(R.string.multiplication)
+            }
+            "DIVISION" -> {
+                getString(R.string.division)
+            }
+            else -> {
+                getString(R.string.addition)
+            }
+        }
+    }
+
     companion object {
         const val CURRENT_STATISTICS_COUNTING = "CURRENT_STATISTICS_COUNTING"
         const val CURRENT_STATISTICS_COUNTING_ENDURANCE = "CURRENT_STATISTICS_COUNTING_ENDURANCE"
         const val COUNTING = "STATISTICS_COUNTING"
         const val COUNTING_ENDURANCE = "STATISTICS_COUNTING_ENDURANCE"
-        const val DATE_TIME_FORMAT = "dd.MMM.YYY HH:mm"
+        const val DATE_TIME_FORMAT = "dd.MMMM.YYYY HH:mm"
         const val COUNTER_MEMORY = "COUNTER_MEMORY"
         const val STATISTIC_COUNTER_MEMORY = "STATISTIC_COUNTER_MEMORY"
     }

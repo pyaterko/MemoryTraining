@@ -1,34 +1,34 @@
 <resources>
-    <string name="app_name">Training apparatus</string>
+    <string name="app_name">Тренажёр</string>
     <string name="question_mark">\?</string>
-    <string name="welcome_title">Number Composition</string>
-    <string name="button_understand">Clear</string>
+    <string name="welcome_title">Состав числа</string>
+    <string name="button_understand">Понятно</string>
     <string name="welcome_logo">Welcome logo</string>
-    <string name="choose_level_title">Choose a level:</string>
-    <string name="choose_operation">Select an action:</string>
-    <string name="addition">Addition</string>
-    <string name="subtraction">Subtraction</string>
-    <string name="multiplication">Multiplication</string>
-    <string name="division">Division</string>
-    <string name="choose_game">Choose a game:</string>
-    <string name="game_counting">Verbal counting</string>
-    <string name="game_memory">Visual memory</string>
-    <string name="easy_level">Easy</string>
-    <string name="normal_level">Average</string>
-    <string name="hard_level">Hard</string>
-    <string name="test_level">Test</string>
-    <string name="game_over">Game Over</string>
-    <string name="score_answers">Your account: %s</string>
-    <string name="score_percentage">Percentage of correct answers: %s</string>
-    <string name="retry">Try again</string>
-    <string name="right_answers">%s correct answers out of %s needed</string>
-    <string name="required_percentage">Required percentage of correct answers: %s</string>
-    <string name="required_score">Required number of correct answers: %s</string>
-    <string name="progress_answers">%s correct answers (minimum %s)</string>
-    <string name="ok">ok</string>
-    <string name="no">no</string>
+    <string name="choose_level_title">Выберите уровень:</string>
+    <string name="choose_operation">Выберите действие:</string>
+    <string name="addition">Сложение</string>
+    <string name="subtraction">Вычитание</string>
+    <string name="multiplication">Умножение</string>
+    <string name="division">Деление</string>
+    <string name="choose_game">Выберите игру:</string>
+    <string name="game_counting">Устный счет</string>
+    <string name="game_memory">Зрительная память</string>
+    <string name="easy_level">Легкий</string>
+    <string name="normal_level">Средний</string>
+    <string name="hard_level">Тяжелый</string>
+    <string name="test_level">Тестовый</string>
+    <string name="game_over">Закончить Игру</string>
+    <string name="score_answers">Ваш счет: %s</string>
+    <string name="score_percentage">Процент правильных ответов: %s</string>
+    <string name="retry">Попробовать снова</string>
+    <string name="right_answers">Правильных ответов %s из %s необходимых</string>
+    <string name="required_percentage">Необходимый процент правильных ответов: %s</string>
+    <string name="required_score">Необходимое количество правильных ответов: %s</string>
+    <string name="progress_answers">Правильных ответов %s (минимум %s)</string>
+    <string name="ok">да</string>
+    <string name="no">нет</string>
 
-    <string name="multiplication_table">Multiplication table\n\n
+    <string name="multiplication_table">Таблица умножения\n\n
         2 x 2 = 4  \t\t\t   3 x 2 = 6\n
         2 x 3 = 6   \t\t\t  3 x 3 = 9\n
         2 x 4 = 8   \t\t\t  3 x 4 = 12\n
@@ -64,7 +64,7 @@
         8 x 7 = 56  \t\t     9 x 7 = 63\n
         8 x 8 = 64  \t\t     9 x 8 = 72\n
         8 x 9 = 72  \t\t     9 x 9 = 81</string>
-    <string name="tables_division">\nDivision table\n\n
+    <string name="tables_division">\nтаблица деления\n\n
         2 : 2 = 1  \t\t\t  3 : 3 = 1  \n
         4 : 2 = 2  \t\t\t  6 : 3 = 2\n
         6 : 2 = 3  \t\t\t  9 : 3 = 3\n
@@ -172,24 +172,24 @@
         то есть общим результатом могут быть либо 83, либо 88. Проверяем:\n
         38 х 88 = 3344\n
         Решение найдено! А если бы вариант 88 не подошел, верным оказалось бы число 83.</string>
-    <string name="tables_title">Tables</string>
-    <string name="tb_multiplication">Multiplications</string>
-    <string name="tb_division">Divisions</string>
-    <string name="help_add">addition</string>
-    <string name="help_sub">subtraction</string>
-    <string name="help_mul">multiplication</string>
-    <string name="help_div">division</string>
-    <string name="repeat">Repeat</string>
-    <string name="select_level_difficulty">Exit</string>
-    <string name="settings">Settings</string>
+    <string name="tables_title">Таблицы</string>
+    <string name="tb_multiplication">Умножения</string>
+    <string name="tb_division">Деления</string>
+    <string name="help_add">сложение</string>
+    <string name="help_sub">вычитание</string>
+    <string name="help_mul">умножение</string>
+    <string name="help_div">деление</string>
+    <string name="repeat">Повторить</string>
+    <string name="select_level_difficulty">Выход</string>
+    <string name="settings">Настройки</string>
     <string name="enable_sound">enable</string>
-    <string name="enable_sound_title">Turn on sound</string>
+    <string name="enable_sound_title">Включить звук</string>
     <string name="game_options">game options</string>
-    <string name="game_options_title">Oral account option</string>
-    <string name="endurance_game">endurance game</string>
-    <string name="time_game">time game</string>
-    <string name="difficulty_level">Difficulty level</string>
+    <string name="game_options_title">Вариант устного счета</string>
+    <string name="endurance_game">игра на выносливость</string>
+    <string name="time_game">игра на время</string>
+    <string name="difficulty_level">Уровень сложности</string>
     <string name="difficulty_level_key">difficulty level</string>
-    <string name="choose_arithmetic_operation">Select arithmetic operation</string>
+    <string name="choose_arithmetic_operation">Выбрать арифметическую операцию</string>
     <string name="arithmetic_operation_key">arithmetic operation</string>
 </resources>

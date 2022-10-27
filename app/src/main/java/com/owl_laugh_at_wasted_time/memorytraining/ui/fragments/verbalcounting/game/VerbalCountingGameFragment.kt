@@ -2,6 +2,7 @@ package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -28,8 +29,6 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
             add(binding.tvOption2)
             add(binding.tvOption3)
             add(binding.tvOption4)
-            add(binding.tvOption5)
-            add(binding.tvOption6)
         }
     }
 
@@ -40,9 +39,11 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val ok = MediaPlayer.create(requireContext(), R.raw.zvuk)
+        val not = MediaPlayer.create(requireContext(), R.raw.oshybka)
         viewModel.operation = getOperation()
         obserbViewModel()
-        setOnClickListenerToOptions()
+        setOnClickListenerToOptions(ok, not)
         viewModel.startGame(getLevel())
         binding.textViewMath.text = getTextMath(getOperation())
 
@@ -65,15 +66,27 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
         }
     }
 
-    private fun setOnClickListenerToOptions() {
+    private fun setOnClickListenerToOptions(ok: MediaPlayer, not: MediaPlayer) {
         for (tvOption in tvOptions) {
             tvOption.setOnClickListener {
                 val isCorrectlyResult = tvOption.text.toString().toInt() == currentQuestion.result
+                setSound(isCorrectlyResult, ok, not)
                 binding.result.text = getTextByResult(isCorrectlyResult)
                 binding.result.setTextColor(
                     getColorByState(isCorrectlyResult)
                 )
                 viewModel.chooeAnswee(tvOption.text.toString().toInt(), getLevel())
+            }
+        }
+    }
+
+    private fun setSound(correctlyResult: Boolean, ok: MediaPlayer, not: MediaPlayer) {
+
+        if (sharedPreferences.getBoolean(getString(R.string.enable_sound), false)) {
+            if (correctlyResult) {
+                ok.start()
+            } else {
+                not.start()
             }
         }
     }
