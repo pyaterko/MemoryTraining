@@ -39,7 +39,7 @@ class VerbalCountingGameFragment : BaseFragment(R.layout.fragment_verbal_countin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ok = MediaPlayer.create(requireContext(), R.raw.zvuk)
+        val ok = MediaPlayer.create(requireContext(), R.raw.schelchok)
         val not = MediaPlayer.create(requireContext(), R.raw.oshybka)
         viewModel.operation = getOperation()
         obserbViewModel()

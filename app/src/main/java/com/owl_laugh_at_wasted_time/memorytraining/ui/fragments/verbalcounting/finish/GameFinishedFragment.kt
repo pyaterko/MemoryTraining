@@ -1,12 +1,10 @@
 package com.owl_laugh_at_wasted_time.memorytraining.ui.fragments.verbalcounting.finish
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.preference.PreferenceManager
 import com.owl_laugh_at_wasted_time.memorytraining.R
 import com.owl_laugh_at_wasted_time.memorytraining.databinding.FragmentGameFinishedBinding
 import com.owl_laugh_at_wasted_time.memorytraining.domain.verbalcounting.entity.GameResult
@@ -19,7 +17,6 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
     private val binding by viewBinding(FragmentGameFinishedBinding::bind)
     private val args by navArgs<GameFinishedFragmentArgs>()
     private val gameResult: GameResult by lazy { args.resuit }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,11 +90,25 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
     ).getInt(COUNTING_ENDURANCE, 0)
 
     private fun getStringStatistics(): String {
-        return "Лучший результат устного счета\nна время:\n$dateOfCreation\n${getStrinBygOperation()} уровень ${getStringByLevel()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
+        return String.format(
+            getString(R.string.statistic_verbal),
+            dateOfCreation,
+            getStrinBygOperation(),
+            getStringByLevel(),
+            gameResult.countOfQuestions,
+            gameResult.countOfRightAnswers
+        )
     }
 
     private fun getStringStatisticsEndurance(): String {
-        return "Лучший результат устного счета\nна выносливость:\n$dateOfCreation\n${getStrinBygOperation()} уровень ${getStringByLevel()} :\nответов :\t\t ${gameResult.countOfQuestions}\nправильных ответов : ${gameResult.countOfRightAnswers} "
+        return String.format(
+            getString(R.string.statistic_verbal_endurance),
+            dateOfCreation,
+            getStrinBygOperation(),
+            getStringByLevel(),
+            gameResult.countOfQuestions,
+            gameResult.countOfRightAnswers
+        )
     }
 
     private fun getPercentOfRightAnswers() = with(gameResult) {
@@ -113,7 +124,6 @@ class GameFinishedFragment : BaseFragment(R.layout.fragment_game_finished) {
     } else {
         R.drawable.ic_sad
     }
-
 
 
 }

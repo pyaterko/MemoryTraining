@@ -75,7 +75,7 @@ class MemoryFragment : BaseFragment(R.layout.fragment_memory) {
     }
 
     private fun getStringStatistics(): String {
-        return "Лучший результат зрительной памяти:\t\t$dateOfCreation\nподряд выигрышей :\t\t $counter "
+        return String.format(getString(R.string.statistic_memory),dateOfCreation,counter)
     }
 
     private fun finish(): Boolean {

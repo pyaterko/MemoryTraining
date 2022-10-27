@@ -25,6 +25,9 @@
     <string name="required_percentage">Required percentage of correct answers: %s</string>
     <string name="required_score">Required number of correct answers: %s</string>
     <string name="progress_answers">%s correct answers (minimum %s)</string>
+    <string name="statistic_memory">Best visual memory score:\n %s\nwins in a row :%s</string>
+    <string name="statistic_verbal">The best score\nfor time:\n%s\n%s level %s :\nanswers : %s\ncorrect answers : %s</string>
+    <string name="statistic_verbal_endurance">The best score\nfor endurance:\n%s\n%s level %s :\nanswers : %s\ncorrect answers : %s</string>
     <string name="ok">ok</string>
     <string name="no">no</string>
 
@@ -109,69 +112,10 @@
         72 : 8 = 9 \t\t 81 : 9 = 9\n
         80 : 8 = 10\t\t 90 : 9 = 10
     </string>
-    <string name="multiplication_description">13*18 = ?\n1.
-        Складываем вторые цифры каждого числа,
-        то есть 3+8=11- именно столько будет десятков, поэтому 11*10=110;\n
-        2. Теперь эти же цифры перемножим, то есть
-        3*8=24 - столько будет единиц;\n
-        3. Теперь осталось сложить полученные результаты и прибавить к ответу 100,
-        то есть 13*18 = 110+24+100=234. Получаем, что 13*18 =234\n
-    Пусть даны два двузначных числа, у которых сумма единиц равна 10:\n
-      M = 10m + n, K = 10a + 10 - n.\n
-       Например, вычислим 77 x 13. Сумма единиц этих чисел равна 10, т.к. 7 + 3 = 10.\n
-        Сначала ставим меньшее число перед большим: 77 x 13 = 13 x 77\n
-       Чтобы получить круглые числа, мы забираем три единицы от 13 и добавляем их к 77.\n
-        Теперь перемножим новые числа 80 x 10, а к полученному результату прибавим произведение
-        отобранных 3 единиц на разность старого числа 77 и нового числа 10:\n
-       13 x 77 = 10 x 80 + 3 x (77 - 10) = 800 + 3 x 67 =
-        800 + 3 x (60 + 7) = 800 + 3 x 60 + 3 x 7 = 800 + 180 + 21 = 800 + 201 = 1001.\n
-        У этого приёма есть частный случай: всё значительно упрощается, когда
-        у двух сомножителей одинаковое число десятков. В этом случае число десятков
-        умножается на следующее за ним число и к полученному результату приписывается
-        произведение единиц этих чисел. Посмотрим, как элегантен этот приём на примере.\n
-       48 x 42.\n
-        Число десятков 4, последующее число: 5; 4 x 5 = 20. Произведение единиц: 8 x 2 = 16. Значит,
-       48 x 42 = 2016.\n
-        99 x 91.\n
-        Число десятков: 9, последующее число: 10; 9 x 10 = 90. Произведение единиц: 9 x 1 = 09. Значит,
-       99 x 91 = 9009.\n
-        Ага, то есть, чтобы перемножить 95 x 95, достаточно посчитать 9 x 10 = 90 и 5 x 5 = 25 и ответ готов:
-       95 x 95 = 9025.\nТогда предыдущий пример можно вычислить немного проще:\n
-       195^2 = (100 + 95)^2 =  10000 + 2 x 100 x 95 + 95^2 = 10000 + 9500 x 2 + 9025 = 10000 + (90+5) x 2 x 100 + 9000 + 25 =
-       = 10000 + 19000 + 1000 +  8000  + 25 = 38025. </string>
-
-    <string name="add_description">Если вы умеете без ошибок складывать числа от 1 до 10,\n
-        вы справитесь и со сложением других чисел. Главное – научиться выполнять разбор простых
-        чисел на разрядные части, чтобы потом складывать эти звенья друг с другом.\n\n
-        Например, мы прибавляем 421 к 355.\n Первое число можно представить как 400 + 20 + 1,
-        а второе как 300 + 50 + 5. Теперь складываем поочередно сотни, десятки и единицы:\n
-        421 + 355 = 400 + 300 + 20 + 50 + 1 + 5 = 776</string>
-    <string name="subtraction_descriptiom">Аналогично выполняется вычитание, только в этом случае на составные
-        части разбивается только то число, которое вычитается.\n
-        Например, при решении примера 425 - 222 мы разбиваем 222 на разрядные части: 222 = 200 + 20 + 2 и получаем:\n
-        425 - 222 = 425 - 200 - 20 - 2 = 225 - 20 - 2 = 205 - 2 = 203.</string>
-    <string name="division_descriptiob">При делении многозначного числа на однозначное из первого выделяем максимально
-        возможную часть, которая делится на наше число без остатка (для этого нужно знать на уровне автоматизма
-        таблицу умножения).\n
-        К примеру, делим 7136 на 8.\nИз 7136 выделяем 6400 – это самое больше число, которое без остатка
-        делится на 8:\n
-        7136 : 8 = (6400 + 736) : 8 = 800 + 736:8\n
-        Теперь аналогично поступаем с числом 736, выделяя из него 720:\n
-        736 : 8 = (720 + 16) : 8 = 90 + 16 : 2.\n
-        Нам остается разделить последнее звено на 8, а затем сложить все результаты последовательных делений:\n
-        16 : 8 = 2  7136 : 8 = 800 + 90 + 2 = 892\n\n
-        «Правило последней цифры результата при перемножении двух чисел» действует при делении какого-либо
-        большого числа на двузначное. Надо запомнить следующий факт: если умножать два многозначных числа,
-        то последняя цифра произведения всегда равна последней цифре перемножения двух цифр, на которые эти
-        числа заканчиваются.\n
-        Например, сколько будет 3344 : 38? Сначала пользуемся методом «подгона» и интуитивно находим более-менее
-        «круглое» число, которое при умножении на 38 даст результат, приближенный к 3344. Попробуем число 90.\n
-        38 х 90 = 3420\n
-        Значит, нужное нам число меньше 90, но больше 80. Определяем его последнюю цифру – ее произведение
-        на 8 (окончание числа 38) должно заканчиваться цифрой 4 (окончание числа 3344). Нам подходят числа 3 и 8,
-        то есть общим результатом могут быть либо 83, либо 88. Проверяем:\n
-        38 х 88 = 3344\n
-        Решение найдено! А если бы вариант 88 не подошел, верным оказалось бы число 83.</string>
+    <string name="multiplication_description">Multiplying Numbers in Your Mind \nMultiplication is the repeated repetition of a number. If you need to multiply 8 by 4, this means that the number 8 must be repeated 4 times. 84=8+8+8+8=32 Since all complex problems are reduced to simpler ones, you need to be able to multiply all single-digit numbers. There is a great tool for this - the multiplication table. If you do not know this table by heart, then we strongly recommend that you first learn it and only then take up the practice of mental counting. In addition, there is, in fact, nothing to learn there. Multiplication of multidigit numbers by single digits First, practice multiplying multidigit numbers by single digits. Let it be necessary to multiply 528 by 6. We divide the number 528 into digits and go from the oldest to the youngest. We multiply first and then add the results. 528=500+20+8 5286=5006+206+86=3000+120+48=3168 Multiplication of two-digit numbers Here, too, there is nothing complicated, only the load on short-term memory is a little more. We multiply 28 and 32. To do this, we reduce the whole operation to multiplication by single-digit numbers. Let s represent 32 as 30+2 2832=2830+282=2030+830+202+82=600+240+40+16=896 Another example. Multiply 79 by 57. This means that you need to take the number 79 57 times. Let s break the whole operation into stages. First we multiply 79 by 50, and then - 79 by 7.</string>
+    <string name="add_description">Adding Numbers in Your Mind \nTo learn how to add large numbers mentally, you need to be able to add numbers up to 10 without error. Ultimately, any complex task comes down to performing a few trivial steps. Most often, problems and errors occur when adding numbers with a “go through 10”. When adding (and even when subtracting), it is convenient to use the technique of reliance on a dozen. What s this? First, we mentally ask ourselves how much one of the terms is missing up to 10, and then we add to 10 the difference remaining up to the second term. For example, let s add the numbers 8 and 6. To get 10 from 8, 2 is not enough. Then 4 = 6-2 will remain to be added to 10. As a result, we get: 8+6=(8+2)+4=10+4=14 The main trick with adding large numbers is to break them into bit parts, and then add these parts together. Suppose we need to add two numbers: 356 and 728. The number 356 can be represented as 300+50+6. Similarly, 728 would be 700+20+8. Now add up: 356+728=(300+700)+(50+20)+(8+6)=1000+70+14=1084</string>
+    <string name="subtraction_descriptiom">Subtracting Numbers in Your Mind\n Subtracting numbers will also come easy. But unlike addition, where each number is divided into bit parts, when subtracting, you only need to “break” the number that we subtract. For example, how much is 528-321? We break the number 321 into bit parts and get: 321=300+20+1. Now we count: 528-300-20-1=228-20-1=208-1=207 Try to visualize the processes of addition and subtraction. At school, everyone was taught to count in a column, that is, from top to bottom. One way to restructure thinking and speed up counting is not to count from top to bottom, but from left to right, breaking numbers into place parts.</string>
+    <string name="division_descriptiob">Division of numbers in the mind \nIt remains to deal with the division. In fact, this is the inverse operation of multiplication. With the division of numbers up to 100, no problems should arise at all - after all, there is a multiplication table that you know by heart. Dividing by a single number When dividing multi-digit numbers by a single one, it is necessary to select the largest possible part, which can be divided using the multiplication table. For example, there is the number 6144, which needs to be divided by 8. We recall the multiplication table and understand that the number 5600 will be divided by 8. Let s imagine the example as follows: 6144:8=(5600+544):8=700+544:8 Further from number 544, we also select the largest number that is divisible by 8. We have: 544:8=(480+64):8=60+64:8 It remains to divide 64 by 8 and get the result by adding all the results of the division 64:8=8 6144:8=700+60+8=768 Dividing by a two-digit number When dividing by a two-digit number, you must use the rule of the last digit of the result when multiplying two numbers. When multiplying two multi-digit numbers, the last digit of the multiplication result always coincides with the last digit of the result of multiplying the last digits of these numbers. For example, let s multiply 1325 by 656. As a rule, the last digit in the resulting number will be 0, since 56=30. Indeed, 1325656=869200. Now, armed with this valuable information, consider dividing by a two-digit number. How much is 4424:56? Initially, we will use the “fitting” method and find the limits within which the result lies. We need to find a number that, when multiplied by 56, will give 4424. Intuitively, let s try the number 80. 5680=4480 So the desired number is less than 80 and clearly greater than 70. Let s determine its last digit. Its product by 6 must end with the number 4. According to the multiplication table, the results 4 and 9 are suitable for us. It is logical to assume that the result of division can be either the number 74 or 79. Check: 7956=4424 Done, the solution has been found! If the number 79 had not come up, the second option would certainly have been correct.</string>
     <string name="tables_title">Tables</string>
     <string name="tb_multiplication">Multiplications</string>
     <string name="tb_division">Divisions</string>
