@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.owl_laugh_at_wasted_time.memorytraining"
         minSdk 24
-        targetSdk 32
+        targetSdk 24
         versionCode 1
         versionName "1.0"
 
