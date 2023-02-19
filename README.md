@@ -7,7 +7,7 @@ The "mental counting training" mode is suitable for children in grades 1,2,3, 4.
 need to pull up (multiplication, division, addition, subtraction). Answers during training should be entered in the
 format “choose the correct option”.
 
-![photo_2023-02-19_13-49-02](https://user-images.githubusercontent.com/110412294/219946242-e55a889b-18cc-49e0-a611-8e15cbf1a183.jpg)
+![photo_2023-02-19_13-49-09](https://user-images.githubusercontent.com/110412294/219946331-866fb0fb-4679-42fe-b89f-de09cb93e272.jpg)
 
 There are two options for the game “for time” and “for endurance”. You need to solve
 examples for time not only correctly, but also quickly. Here you will have to show all your knowledge of mathematics 
