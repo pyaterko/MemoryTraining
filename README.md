@@ -1,13 +1,14 @@
 # MemoryTraining
 Game + visual memory training + mental counting training + multiplication and division table in one application!
 
-![photo_2023-02-19_13-49-02](https://user-images.githubusercontent.com/110412294/219946223-cf154570-dcb7-437f-ab4c-6c701b2da565.jpg)
+![photo_2023-02-19_13-48-38](https://user-images.githubusercontent.com/110412294/219946417-b2d4a037-ac0d-49cc-8409-c9ab0f5b5ebf.jpg)
+
 
 The "mental counting training" mode is suitable for children in grades 1,2,3, 4. Choose the operations that you
 need to pull up (multiplication, division, addition, subtraction). Answers during training should be entered in the
 format “choose the correct option”.
 
-![photo_2023-02-19_13-49-09](https://user-images.githubusercontent.com/110412294/219946331-866fb0fb-4679-42fe-b89f-de09cb93e272.jpg)
+![photo_2023-02-19_13-49-02](https://user-images.githubusercontent.com/110412294/219946223-cf154570-dcb7-437f-ab4c-6c701b2da565.jpg)
 
 There are two options for the game “for time” and “for endurance”. You need to solve
 examples for time not only correctly, but also quickly. Here you will have to show all your knowledge of mathematics 
